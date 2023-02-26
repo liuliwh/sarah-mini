@@ -1,0 +1,8 @@
+/* pages/updownload/updownload.wxss */
+.container {
+  text-align: center;
+}
+.btn {
+  margin-top: 30rpx;
+  background-color: darkgray;
+}

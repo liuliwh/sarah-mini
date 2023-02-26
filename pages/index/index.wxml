@@ -1,0 +1,14 @@
+<!--index.wxml-->
+<view class="container">
+  <form catchsubmit="dispatch">
+    <input maxlength="-1" name="customRequest" placeholder="输入" value="{{inputValue}}" />
+    <button form-type="submit" class="btn" data-type="submit">Request</button>
+    <button form-type="submit" class="btn" data-type="setCustomData">setCustomData</button>
+    <button form-type="submit" class="btn" data-type="sysInfo">sysInfo</button>
+  </form>
+  <button bindtap="clearInput">clearInput</button>
+  <text>Echo result</text>
+  <scroll-view id="v_echo" scroll-x="true" scroll-y="true">
+    {{echo}}
+  </scroll-view>
+</view>
