@@ -9,7 +9,7 @@ Page({
    */
   data: {
     echo: '',
-    inputValue: '',
+    inputValue: ''
   },
   _processRequestEchoResult(resp, reqObj) {
     let data = {
@@ -31,11 +31,11 @@ Page({
     reqObj['name'] = 'file'
     fs.access({
       path: reqObj['filePath'],
-      success(res) {
+      success: (res) => {
         // 文件存在
         wx.uploadFile(reqObj)
       },
-      fail(res) {
+      fail: (res) => {
         // 文件不存在
         fs.writeFile({
           filePath: reqObj['filePath'],
@@ -54,11 +54,10 @@ Page({
     })
   },
   dispatch(e) {
-    const val = e.detail.value.customRequest
     this.setData({
       echo: '',
-      inputValue: val
     })
+    const val = e.detail.value.customRequest
     let reqObj;
     try {
       reqObj = JSON.parse(val || '{}')
@@ -75,9 +74,21 @@ Page({
       this._upload(reqObj)
     } else if (button_type == 'download') {
       // https://developers.weixin.qq.com/miniprogram/dev/api/network/download/wx.downloadFile.html
-      reqObj.url = reqObj.url || `${app.globalData.DEFAULT_DOMAIN}/a_dummy.js`
+      reqObj.url = reqObj.url || `${app.globalData.DEFAULT_DOMAIN}/a_dummy`
       this._download(reqObj)
+    }else if (button_type == 'request') {
+      reqObj.url = reqObj.url || `${app.globalData.DEFAULT_DOMAIN}/${Date.now()}`
+      this._request(reqObj)
     }
+  },
+  _request(reqObj) {
+    reqObj.success = (res) => {
+      this._processRequestEchoResult(res, reqObj)
+    }
+    reqObj.fail = (res) => {
+      this._echoResult(res, reqObj)
+    }
+    wx.request(reqObj)
   },
   _download(reqObj) {
     reqObj.success = (res) => {

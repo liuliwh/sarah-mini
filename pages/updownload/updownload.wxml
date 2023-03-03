@@ -1,11 +1,12 @@
 <!--pages/updownload/updownload.wxml-->
 <view class="container">
 <form catchsubmit="dispatch">
-  <input maxlength="-1" name="customRequest" placeholder="输入" value="{{inputValue}}"/>
+  <input maxlength="-1" name="customRequest" placeholder="输入" value="{{inputValue}}" />
   <button form-type="submit" class="btn" data-type="upload" >Upload</button>
   <button form-type="submit" class="btn" data-type="download" >Download</button>
+  <button form-type="submit" class="btn" data-type="request" >Request</button>
+  <button form-type="reset">clearInput</button>
 </form>
-<button bindtap="clearInput">clearInput</button>
 <text>Echo result</text>
 <scroll-view id="v_echo" scroll-x="true" scroll-y="true">
 {{echo}}

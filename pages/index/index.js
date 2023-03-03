@@ -13,12 +13,12 @@ const COUNT_KEYS = 5
 Page({
   data: {
     echo: '',
-    inputValue: '',
+    inputValue: ''
   },
   _clearCustomData(ids) {
     let res = ids.map((i) => {
-      return sdk_integrate.setCustomData({
-        key: `${i}`,
+      return sdk_integrate.setDataCollector({
+        slotID: `${i}`,
         data: ''
       })
     })
@@ -27,7 +27,7 @@ Page({
   _setCustomData(val) {
     let parsed = JSON.parse(val)
     let obj = translatePlaceHolder(parsed)
-    let res = ras.setCustomData(obj)
+    let res = sdk_integrate.setDataCollector(obj)
     res['input'] = obj
     this._echoResult(res)
   },
@@ -42,7 +42,7 @@ Page({
       })
       return
     }
-    requestInput.url = requestInput.url || `${app.globalData.DEFAULT_DOMAIN}/`
+    requestInput.url = requestInput.url || `${app.globalData.DEFAULT_DOMAIN}/${Date.now()}`
     let reqObj = this.makeRequest(requestInput)
     reqObj.success = (res) => {
       this._processRequestEchoResult(res, reqObj)
@@ -53,10 +53,10 @@ Page({
     wx.request(reqObj)
   },
   dispatch(e) {
-    const val = e.detail.value.customRequest
     this.setData({
       echo: ''
     })
+    const val = e.detail.value.customRequest
     const button_type = e.detail.target.dataset.type
     if (button_type == 'setCustomData') {
       this.setCustomData(val)
@@ -83,7 +83,7 @@ Page({
   setCustomData(val) {
     let trimed = val.trim()
     if (trimed.length == 0) {
-      this._clearCustomData([...Array(COUNT_KEYS).keys()])
+      this._clearCustomData([...Array(COUNT_KEYS).keys()].map(i => i+1))
     } else if (/^[\d\s,]+$/.test(trimed)) {
       let keys = trimed.split(',').map(item => item.trim())
       this._clearCustomData(keys)

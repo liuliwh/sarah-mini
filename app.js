@@ -1,5 +1,5 @@
 // app.js
-const sdk_integrate = require('/utils/sdk_wx_data.js');
+const sdk_integrate = require('/utils/sdk_wx4f7faed91cc7062c_2303.js');
 App({
   globalData: {
     sysInfo: {},
@@ -22,11 +22,10 @@ App({
     const names = ['version','brand','model','SDKVersion','host']
     wx.getSystemInfoAsync({
       success: (res) => {
-        let _res = {}
-        names.forEach((v) => _res[v]=res[v])
-        this.globalData.sysInfo = _res
+        names.forEach((v) => {this.globalData.sysInfo[v] = res[v]})
       }
     })
+    // https://developers.weixin.qq.com/miniprogram/dev/api/open-api/account-info/wx.getAccountInfoSync.html
   },
 })
 

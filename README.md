@@ -12,7 +12,7 @@
 ### 测试request
 | 输入样例                                                                     | 用途                                                |
 |------------------------------------------------------------------------------|-----------------------------------------------------|
-| 空                                                                           | 向app.js globalData.DEFAULT_DOMAIN的根路径发送GET请求                                       |
+| 空                                                                           | 向url`${app.globalData.DEFAULT_DOMAIN}/${Date.now()}`发送GET请求                                       |
 | {"url":"https://exampl.com/path","header":{"Header-A":"abc"},"method":"GET"}                                                                           | 向指定url发送对应的请求，参数配置参照小程序API文档                                      |
 ### 测试数据收集功能
 | 输入样例                                                                     | 用途                                                |
@@ -25,3 +25,6 @@
 ## UpDownLoad页面
 目的：用于测试hook wx.uploadfile, wx.downloadfile功能.
 输入样例: 参照小程序官方集成文档,本页面的输入样例与主页面的测试request功能使用方式相似.
+## Interval页面
+目的：该页面定时发GET请求,主要用于手动测试如网络切换与充电状态切换等情况.
+输入样例: 输入url前缀.

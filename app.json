@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/updownload/updownload"
+    "pages/updownload/updownload",
+    "pages/interval/interval"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -11,13 +12,20 @@
   },
   "tabBar": {
     "position": "bottom",
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "Home"
-    }, {
-      "pagePath": "pages/updownload/updownload",
-      "text": "UpDown"
-    }]
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "Home"
+      },
+      {
+        "pagePath": "pages/updownload/updownload",
+        "text": "UpDown"
+      },
+      {
+        "pagePath": "pages/interval/interval",
+        "text": "Interval"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
